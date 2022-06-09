@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Controllers\api\v1\Common\DataResponse;
 use App\Http\Controllers\api\v1\Common\ResponseCode;
 use App\Utils\ErrorMessage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -38,8 +39,16 @@ class RegisterEloquentRepository implements RegisterRepositoryInterface
             $user->password = Hash::make($param['password']);
             $user->save();
 
+            //Create token
+            $token = Auth::login($user);
+
             DB::commit();
-            $response->Data = [];
+            $response->Data = [
+                'authorisation' => [
+                    'token' => $token,
+                    'type'  => 'bearer',
+                ]
+            ];
 
         } catch(\Exception $e) {
             DB::rollBack();
