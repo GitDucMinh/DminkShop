@@ -23,7 +23,7 @@ class JwtMiddleware
             $user = JWTAuth::parseToken()->authenticate();
         } catch (\Exception $e) {
             if ($e instanceof TokenExpiredException) {
-                $newToken = JWTAuth::pasreToken()->refresh();
+                $newToken = JWTAuth::parseToken()->refresh();
                 return response()->json([
                     'success' => false,
                     'token'   => $newToken,

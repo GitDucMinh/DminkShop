@@ -49,7 +49,7 @@ class DataResponse
     public function GetData()
     {
         $fieldName = '';
-        $message = 'Successfully';
+        $message = '';
         if ($this->DataErrors && !isset($this->DataErrors["Line"])) {
             foreach ($this->DataErrors as $key => $value) {
                 $fieldName = $key;

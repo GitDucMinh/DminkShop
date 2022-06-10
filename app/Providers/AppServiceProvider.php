@@ -17,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\Auth\RegisterRepositoryInterface::class,
             \App\Repositories\Auth\RegisterEloquentRepository::class
         );
+        $this->app->singleton(
+            \App\Repositories\Interfaces\Auth\LoginRepositoryInterface::class,
+            \App\Repositories\Auth\LoginEloquentRepository::class
+        );
     }
 
     /**
